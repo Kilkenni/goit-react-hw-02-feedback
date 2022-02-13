@@ -1,5 +1,10 @@
 import React from "react";
 
+import Section from "./Section";
+import Statistics from "./Statistics";
+import Notification from "./Notification";
+import FeedbackOptions from "./FeedbackOptions";
+
 export default class App extends React.Component {
   state = {
     good: 0,
@@ -12,6 +17,8 @@ export default class App extends React.Component {
     this.setState((currentState) => {
       return { [statName] : currentState[statName] + 1};
     });
+
+    // event.currentTarget.blur();
   }
 
   countTotalFeedback = () => {
@@ -41,24 +48,36 @@ export default class App extends React.Component {
         // display: 'flex',
         // justifyContent: 'center',
         // alignItems: 'center',
-        fontSize: 40,
+        fontSize: 20,
         // textTransform: 'uppercase',
         color: '#010101',
       }}
       >
-        {/* <h1>Welcome to Expresso</h1> */}
-        <h2>Please leave feedback</h2>
-        
-        <button type="button" name="good" onClick={this.onFeedbackClick}>Good</button>
-        <button type="button" name="neutral" onClick={this.onFeedbackClick}>Neutral</button>
-        <button type="button" name="bad" onClick={this.onFeedbackClick}>Bad</button>
+        <h1>Welcome to Expresso</h1>
+        <p>Your feedback is crucial to us and we absolutely totally positively don't throw it out of the window. <br></br> We don't even have windows! That being said...</p>
+        <Section title="How do you like our coffee?">
+          <FeedbackOptions
+            options={[
+              { name: "good", title: "Yum!" },
+              { name: "neutral", title: "Okay-ish" },
+              { name: "bad", title: "Tastes like dirt"},
+            ]}
+            onLeaveFeedback={this.onFeedbackClick}
+          ></FeedbackOptions>
+        </Section>   
 
-        <h2>Coffee statistics</h2>
-        <p>Good service: {this.state.good}</p>
-        <p>Neutral: {this.state.neutral}</p>
-        <p>Bad service: {this.state.bad}</p>
-        <p>Total feedback: {this.countTotalFeedback()}</p>
-        <p>Positive feedback: { this.countPositiveFeedbackPercentage() === false? "unavailable" : this.countPositiveFeedbackPercentage() + "%" }</p>
+        <Section title="Coffee statistics">
+          {this.countTotalFeedback() === 0 ?
+            <Notification message="There is no feedback"></Notification> :
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}>
+            </Statistics>
+          }
+        </Section>
     </div>
   );
   }

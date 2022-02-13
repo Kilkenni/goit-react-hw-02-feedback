@@ -1,0 +1,21 @@
+.btnFeedbackOption {
+  padding: 10px 20px;
+  font-size: inherit;
+
+  background-color: goldenrod;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  min-width: 150px;
+
+  cursor: pointer;
+}
+
+.btnFeedbackOption:focus,
+.btnFeedbackOption:hover {
+  background-color: darkgoldenrod;
+}
+
+.btnFeedbackOption:not(:last-of-type) {
+  margin-right: 15px;
+}
