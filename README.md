@@ -1,5 +1,7 @@
 **Read in other languages: [Русский](README.md), [Polska](README.pl.md).**
 
+# GoIT React Homework #2
+
 # React homework template
 
 Этот проект был создан при помощи
